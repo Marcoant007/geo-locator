@@ -8,6 +8,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
 public class InterestPointDTO {
+    int id;
+
     @NotBlank(message = "Name cannot be null")
     String name;
     
@@ -26,6 +28,14 @@ public class InterestPointDTO {
         interestPointDTO.setCoordinateY(interestPoint.getCoordinateY());
         interestPointDTO.setName(interestPoint.getName());
         return interestPointDTO;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

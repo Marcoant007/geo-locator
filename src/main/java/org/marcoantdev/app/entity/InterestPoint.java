@@ -1,19 +1,31 @@
 package org.marcoantdev.app.entity;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity
+@DynamicUpdate
+@Table(name = "interest_point")
 public class InterestPoint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+ 
+    @NotBlank
+    private String name;
+
+    @PositiveOrZero
+    private int coordinateX;
     
-    private String nome;
-    private int coordenadaX;
-    private int coordenadaY;
+    @PositiveOrZero
+    private int coordinateY;
 
     public Long getId() {
         return id;
@@ -21,22 +33,22 @@ public class InterestPoint {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
-    public int getCoordenadaX() {
-        return coordenadaX;
+    public int getCoordinateX() {
+        return coordinateX;
     }
-    public void setCoordenadaX(int coordenadaX) {
-        this.coordenadaX = coordenadaX;
+    public void setCoordinateX(int coordinateX) {
+        this.coordinateX = coordinateX;
     }
-    public int getCoordenadaY() {
-        return coordenadaY;
+    public int getCoordinateY() {
+        return coordinateY;
     }
-    public void setCoordenadaY(int coordenadaY) {
-        this.coordenadaY = coordenadaY;
+    public void setCoordinateY(int coordinateY) {
+        this.coordinateY = coordinateY;
     }
 }

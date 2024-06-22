@@ -1,4 +1,4 @@
-package org.marcoantdev;
+package org.marcoantdev.integrations;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 

@@ -1,17 +1,14 @@
 package org.marcoantdev.app.dto;
 
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.ws.rs.QueryParam;
 
 public class ProximitySearchDTO {
 
-    @NotNull(message = "Coordinate X cannot be null")
     @PositiveOrZero(message = "Coordinate X must be greater than or equal to zero")
     @QueryParam("x")
     private int x;
 
-    @NotNull(message = "Coordinate Y cannot be null")
     @PositiveOrZero(message = "Coordinate Y must be greater than or equal to zero")
     @QueryParam("y")
     private int y;

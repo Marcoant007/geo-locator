@@ -1,4 +1,4 @@
-package org.marcoantdev.unitary.mock;
+package org.marcoantdev.unit.mock;
 
 import org.marcoantdev.app.dto.InterestPointDTO;
 import org.marcoantdev.app.service.InterestPointService;

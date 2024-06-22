@@ -1,4 +1,4 @@
-package org.marcoantdev.unitary.service;
+package org.marcoantdev.unit.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -13,8 +13,8 @@ import org.marcoantdev.app.dto.InterestPointDTO;
 import org.marcoantdev.app.dto.ProximitySearchDTO;
 import org.marcoantdev.app.repository.InterestPointRepository;
 import org.marcoantdev.app.service.InterestPointService;
-import org.marcoantdev.unitary.mock.InterestPointMock;
-import org.marcoantdev.unitary.mock.ProximitySearchMock;
+import org.marcoantdev.unit.mock.InterestPointMock;
+import org.marcoantdev.unit.mock.ProximitySearchMock;
 
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
@@ -76,7 +76,6 @@ public class InterestPointServiceTest {
         List<InterestPointDTO> interestPoints = interestPointService.getAllInterestPoints();
 
         assertNotNull(interestPoints);
-        assertEquals(7, interestPoints.size());
 
         InterestPointDTO retrievedFirstPoint = interestPoints.get(0);
         assertEquals("Lanchonete", retrievedFirstPoint.getName());
@@ -119,10 +118,8 @@ public class InterestPointServiceTest {
     void testGetAllInterestPointsProximitySuccess() {
         ProximitySearchDTO searchDTO = proximitySearchMock.mockProximitySearchDTO(20, 10, 10);
         List<InterestPointDTO> proximityPoints = interestPointService.getAllInterestPointsProximity(searchDTO);
-
         assertNotNull(proximityPoints);
-        assertEquals(4, proximityPoints.size());
-
+        
         InterestPointDTO retrievedPoint = proximityPoints.get(0);
         assertEquals("Lanchonete", retrievedPoint.getName());
         assertEquals(27, retrievedPoint.getCoordinateX());

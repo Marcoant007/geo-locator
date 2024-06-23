@@ -27,6 +27,63 @@ class InterestPointControllerTest {
 
   @Test
   @Transactional
+  void testCreateInterestPointWithNullName() {
+    InterestPointDTO interestPoint = new InterestPointDTO();
+    interestPoint.setName(null);
+    interestPoint.setCoordinateX(10);
+    interestPoint.setCoordinateY(20);
+
+    given()
+        .contentType(ContentType.JSON)
+        .body(interestPoint)
+        .when()
+        .post("/interest-points")
+        .then()
+        .statusCode(400)
+        .contentType(ContentType.JSON)
+        .body("parameterViolations[0].message", is("Name cannot be null"));
+  }
+
+  @Test
+  @Transactional
+  void testCreateInterestPointWithNegativeCoordinateX() {
+    InterestPointDTO interestPoint = new InterestPointDTO();
+    interestPoint.setName("Test Point");
+    interestPoint.setCoordinateX(-5);
+    interestPoint.setCoordinateY(20);
+
+    given()
+        .contentType(ContentType.JSON)
+        .body(interestPoint)
+        .when()
+        .post("/interest-points")
+        .then()
+        .statusCode(400)
+        .contentType(ContentType.JSON)
+        .body("parameterViolations[0].message", is("Coordinate X must be greater than or equal to zero"));
+  }
+
+  @Test
+  @Transactional
+  void testCreateInterestPointWithNegativeCoordinateY() {
+    InterestPointDTO interestPoint = new InterestPointDTO();
+    interestPoint.setName("Test Point");
+    interestPoint.setCoordinateX(10);
+    interestPoint.setCoordinateY(-8);
+
+    given()
+        .contentType(ContentType.JSON)
+        .body(interestPoint)
+        .when()
+        .post("/interest-points")
+        .then()
+        .statusCode(400)
+        .contentType(ContentType.JSON)
+        .body("parameterViolations[0].message", is("Coordinate Y must be greater than or equal to zero"));
+  }
+
+  @Test
+  @Transactional
   void testCreateInterestPointLanchonete() {
     InterestPointDTO interestPoint = new InterestPointDTO();
     interestPoint.setName("Lanchonete");

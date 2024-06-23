@@ -39,6 +39,7 @@ public class InterestPointServiceTest {
     @BeforeAll
     @Transactional
     void beforeAll() {
+        interestPointRepository.deleteAll();
         interestPointMock.creaInterestPoint("Lanchonete", 27, 12);
         interestPointMock.creaInterestPoint("Posto", 31, 18);
         interestPointMock.creaInterestPoint("Joalheria", 15, 12);
@@ -119,7 +120,8 @@ public class InterestPointServiceTest {
         ProximitySearchDTO searchDTO = proximitySearchMock.mockProximitySearchDTO(20, 10, 10);
         List<InterestPointDTO> proximityPoints = interestPointService.getAllInterestPointsProximity(searchDTO);
         assertNotNull(proximityPoints);
-        
+        assertEquals(4, proximityPoints.size());
+      
         InterestPointDTO retrievedPoint = proximityPoints.get(0);
         assertEquals("Lanchonete", retrievedPoint.getName());
         assertEquals(27, retrievedPoint.getCoordinateX());

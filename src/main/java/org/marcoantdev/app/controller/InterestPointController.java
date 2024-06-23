@@ -29,7 +29,7 @@ public class InterestPointController {
 
     @POST
     @Operation(summary = "Create a new interest point.", description = "Create a new interest point.")
-    public Response createInterestPoint(InterestPointDTO body) {
+    public Response createInterestPoint(@Valid InterestPointDTO body) {
         return Response.ok(interestPointService.createInterestPoint(body)).build();
     }
 

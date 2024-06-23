@@ -23,11 +23,7 @@ public class InterestPointDTO {
 
     public static InterestPointDTO returnDTO(InterestPoint interestPoint) {
         ModelMapper modelMapper = new ModelMapper();
-        InterestPointDTO interestPointDTO = modelMapper.map(interestPoint, InterestPointDTO.class);
-        interestPointDTO.setCoordinateX(interestPoint.getCoordinateX());
-        interestPointDTO.setCoordinateY(interestPoint.getCoordinateY());
-        interestPointDTO.setName(interestPoint.getName());
-        return interestPointDTO;
+        return modelMapper.map(interestPoint, InterestPointDTO.class);
     }
 
     public int getId() {

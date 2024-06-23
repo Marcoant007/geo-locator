@@ -2,6 +2,7 @@ package org.marcoantdev.app.entity;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,12 +20,15 @@ public class InterestPoint {
     private Long id;
  
     @NotBlank
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @PositiveOrZero
+    @PositiveOrZero(message = "The coordinate Y must be a positive or zero value.")
+    @Column(name = "coordinate_x", nullable = false)
     private int coordinateX;
     
-    @PositiveOrZero
+    @PositiveOrZero(message = "The coordinate X must be a positive or zero value.")
+    @Column(name = "coordinate_y", nullable = false)
     private int coordinateY;
 
     public Long getId() {

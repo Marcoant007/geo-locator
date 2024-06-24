@@ -1,70 +1,96 @@
-# geo-locator
+# Geo-Locator
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+Geo-Locator é um serviço inovador que permite a gestão e a localização de pontos de interesse. Utilizando Quarkus, o framework Java supersônico, o Geo-Locator oferece performance e simplicidade no desenvolvimento de APIs RESTful.
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+## Tecnologias Utilizadas
+<img src="https://marcoantdeveloper.netlify.app/assets/img/icons/JAVA.png" width="100px"> 
+<img src="https://marcoantdeveloper.netlify.app/assets/img/icons/QUARKUS.png" width="100px">  <img src="https://marcoantdeveloper.netlify.app/assets/img/icons/DOCKERZADA.png" width="100px">
+<img src="https://marcoantdeveloper.netlify.app/assets/img/icons/POSTGRESQL.png" width="100px">
 
-## Running the application in dev mode
+---
 
-You can run your application in dev mode that enables live coding using:
+
+### Pré-requisitos
+
+- Docker instalado na máquina
+- Maven instalado na máquina
+- Java 17 ou superior
+
+
+___
+
+### Inicie o Docker
+
+1. **Inicie o serviço do banco de dados**
 ```shell script
-./mvnw compile quarkus:dev
+> docker compose up -d
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+___
 
-## Packaging and running the application
+### Inicie o Quarkus 
 
-The application can be packaged using:
+Para iniciar a aplicação basta rodar o comando:
 ```shell script
-./mvnw package
+> mvn quarkus:dev
 ```
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+<img src="https://i.ibb.co/yRyrghC/image.png">
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+> **_NOTE:_**  Aplicação pronta para ultilização rodando na porta http://localhost:8085.
 
-If you want to build an _über-jar_, execute the following command:
+
+___
+### Inicie os Testes
+Para iniciar os testes da aplicação basta rodar o comando:
 ```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
-```
-
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using: 
-```shell script
-./mvnw package -Dnative
+> mvn quarkus:test
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
+<img src="https://i.ibb.co/LCrcQg7/image.png">
+
+> **_NOTE:_**  Com esse comando a aplicação roda os testes unitários e de integração no terminal, mas o vscode também pode rodar os testes.
+
+- Existe uma outra possibilidade de rodar os testes e pode ser acessada via url
 ```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
+> http://localhost:8085/q/dev-ui/continuous-testing
 ```
+<img src="https://i.ibb.co/p0JStzY/image.png">
 
-You can then execute your native executable with: `./target/geo-locator-1.0.0-SNAPSHOT-runner`
+___
+### Endpoints | Swagger
+- Para acessar o swagger basta iniciar a aplicação e acessar a url:
+```shell script
+> http://localhost:8085/q/dev-ui/io.quarkus.quarkus-smallrye-openapi/swagger-ui 
+```
+<img src="https://i.ibb.co/Cm1S04q/image.png">
 
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
+### Regra de Negócio
+### 1. Serviço para cadastrar pontos de interesse
 
-## Related Guides
+- [x]  **Criar a entidade PointOfInterest:**
+    - [x]  Definir atributos: `nome`, `coordenadaX`, `coordenadaY` (inteiros não negativos).
+    - [x]  Garantir que os valores de `coordenadaX` e `coordenadaY` sejam não negativos.
+- [x]  **Criar o repositório PointOfInterestRepository:**
+    - [x]  Implementar os métodos para salvar e recuperar dados do banco de dados.
+- [x]  **Implementar o endpoint de cadastro:**
+    - [x]  Criar o endpoint `POST /points-of-interest`.
+    - [x]  Validar a entrada para garantir que `coordenadaX` e `coordenadaY` sejam não negativos.
+    - [x]  Persistir os dados no banco de dados usando o repositório.
 
-- REST ([guide](https://quarkus.io/guides/rest)): A Jakarta REST implementation utilizing build time processing and Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
-- Hibernate ORM ([guide](https://quarkus.io/guides/hibernate-orm)): Define your persistent model with Hibernate ORM and Jakarta Persistence
-- JDBC Driver - H2 ([guide](https://quarkus.io/guides/datasource)): Connect to the H2 database via JDBC
+### 2. Serviço para listar todos os POIs cadastrados
 
-## Provided Code
+- [x]  **Implementar o endpoint de listagem:**
+    - [x]  Criar o endpoint `GET /points-of-interest`.
+    - [x]  Recuperar todos os POIs do banco de dados usando o repositório.
+    - [x]  Retornar a lista de POIs no formato JSON.
 
-### Hibernate ORM
+### 3. Serviço para listar POIs por proximidade
 
-Create your first JPA entity
-
-[Related guide section...](https://quarkus.io/guides/hibernate-orm)
-
-
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+- [x]  **Implementar a lógica de proximidade:**
+    - [x]  Criar um método para calcular a distância entre dois pontos `(x1, y1)` e `(x2, y2)` usando a fórmula da distância Euclidiana: `sqrt((x2 - x1)^2 + (y2 - y1)^2)`.
+- [x]  **Implementar o endpoint de proximidade:**
+    - [x]  Criar o endpoint `GET /points-of-interest/proximity`.
+    - [x]  Receber parâmetros `x`, `y` e `d-max` na solicitação.
+    - [x]  Recuperar todos os POIs do banco de dados usando o repositório.
+    - [x]  Filtrar os POIs com base na distância calculada para garantir que estejam dentro do raio `d-max`.
+    - [x]  Retornar a lista de POIs que atendem ao critério de proximidade no formato JSON.

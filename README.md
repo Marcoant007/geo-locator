@@ -3,9 +3,7 @@
 Geo-Locator é um serviço inovador que permite a gestão e a localização de pontos de interesse. Utilizando Quarkus, o framework Java supersônico, o Geo-Locator oferece performance e simplicidade no desenvolvimento de APIs RESTful.
 
 ## Tecnologias Utilizadas
-<img src="https://marcoantdeveloper.netlify.app/assets/img/icons/JAVA.png" width="100px"> 
-<img src="https://marcoantdeveloper.netlify.app/assets/img/icons/QUARKUS.png" width="100px">  <img src="https://marcoantdeveloper.netlify.app/assets/img/icons/DOCKERZADA.png" width="100px">
-<img src="https://marcoantdeveloper.netlify.app/assets/img/icons/POSTGRESQL.png" width="100px">
+<img src="https://marcoantdeveloper.netlify.app/assets/img/icons/JAVA.png" width="100px"> <img src="https://marcoantdeveloper.netlify.app/assets/img/icons/QUARKUS.png" width="100px"> <img src="https://marcoantdeveloper.netlify.app/assets/img/icons/DOCKERZADA.png" width="100px"> <img src="https://marcoantdeveloper.netlify.app/assets/img/icons/POSTGRESQL.png" width="100px">
 
 ---
 
@@ -57,6 +55,7 @@ Para iniciar os testes da aplicação basta rodar o comando:
 <img src="https://i.ibb.co/p0JStzY/image.png">
 
 ___
+
 ### Endpoints | Swagger
 - Para acessar o swagger basta iniciar a aplicação e acessar a url:
 ```shell script
@@ -64,8 +63,10 @@ ___
 ```
 <img src="https://i.ibb.co/Cm1S04q/image.png">
 
+___
+
 ### Regra de Negócio
-### 1. Serviço para cadastrar pontos de interesse
+#### 1. Serviço para cadastrar pontos de interesse
 
 - [x]  **Criar a entidade PointOfInterest:**
     - [x]  Definir atributos: `nome`, `coordenadaX`, `coordenadaY` (inteiros não negativos).
@@ -77,14 +78,14 @@ ___
     - [x]  Validar a entrada para garantir que `coordenadaX` e `coordenadaY` sejam não negativos.
     - [x]  Persistir os dados no banco de dados usando o repositório.
 
-### 2. Serviço para listar todos os POIs cadastrados
+#### 2. Serviço para listar todos os POIs cadastrados
 
 - [x]  **Implementar o endpoint de listagem:**
     - [x]  Criar o endpoint `GET /points-of-interest`.
     - [x]  Recuperar todos os POIs do banco de dados usando o repositório.
     - [x]  Retornar a lista de POIs no formato JSON.
 
-### 3. Serviço para listar POIs por proximidade
+#### 3. Serviço para listar POIs por proximidade
 
 - [x]  **Implementar a lógica de proximidade:**
     - [x]  Criar um método para calcular a distância entre dois pontos `(x1, y1)` e `(x2, y2)` usando a fórmula da distância Euclidiana: `sqrt((x2 - x1)^2 + (y2 - y1)^2)`.
